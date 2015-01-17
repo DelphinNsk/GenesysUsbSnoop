@@ -7,7 +7,7 @@ This util analysing usb dump of genesys chip based scanner
 
 before use you need install tshark that was used as main decode engine
 
-then just run:
+then run:
 
 ./decode.py <filename>
 
@@ -15,7 +15,7 @@ it will create folder in the folder where <filename> with name <filename>_dump w
 
 ### Result data description ###
 
-Captured tata have different types
+Captured data have different types:
 
 1. Image binary data (image.data)
 2. Gamma data ([num].gamma_*.dump)
