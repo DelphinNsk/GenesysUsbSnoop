@@ -34,9 +34,10 @@ class GenesysChip:
             self.onBulk(s,c)
 
     def onBulkOut(self,data):
-        words = array.array('H',data)
-        for word in words:
-                self.file.write("{:d} ".format(word));
+        self.file.write(data)
+        #words = array.array('H',data)
+        #for word in words:
+                #self.file.write("{:d} ".format(word));
 
     def onBulkIn(self,data):
         self.file.write(data)
@@ -101,16 +102,16 @@ class GenesysChip:
         if addr &  0x01000000 != 0: # gamma
             colorNum = (addr - 0x01000000 ) /0x200 # step is 0x200
             color = ["r","g","b"][colorNum]
-            filenameBase = "gamma_{:s}.dump".format(color)
+            filenameBase = "gamma_{:s}.bin".format(color)
 
         if addr &  0x10000000 != 0: # slope or shading data
             if addr >= 0x10014000: #shading data
                 colorNum = (addr - 0x10014000) / 0x2A000 # step is 0x2A000
                 color = ["r","g","b"][colorNum]
-                filenameBase = "shading_{:s}.dump".format(color)
+                filenameBase = "shading_{:s}.bin".format(color)
             else:
                 slopeNum = (addr - 0x10000000) / 0x4000 # step is 0x4000
-                filenameBase = "slope_{:d}.dump".format(slopeNum)
+                filenameBase = "slope_{:d}.bin".format(slopeNum)
 
         i = 0
         filename = "{:d}.{:s}".format(i,filenameBase)
@@ -119,7 +120,7 @@ class GenesysChip:
             i = i + 1
             filename = "{:d}.{:s}".format(i,filenameBase)
 
-        return (filename,"a")
+        return (filename,"wb")
 
     def onBuffPreAccess(self,s,c):
         (addr,size) = struct.unpack('II', binascii.unhexlify(s.data) )
