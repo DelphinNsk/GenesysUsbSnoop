@@ -9,9 +9,9 @@ before use you need install tshark that was used as main decode engine
 
 then run:
 
-./decode.py <filename>
+./decode.py \<filename\>
 
-it will create folder in the folder where <filename> with name <filename>_dump where will be stored decoded data
+it will create folder in the folder where \<filename\> with name \<filename\>_dump where will be stored decoded data
 
 ### Result data description ###
 
